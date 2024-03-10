@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream TV</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+
+<style>
+    @font-face {
+        font-family: 'Consolas';
+        src: url("fontall/consolas.TTF") format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Consolas', sans-serif;
+    }
+
+    body {
+        user-select: none;
+        background-color: #1d232e;
+    }
+
+    .headertop {
+        width: 100%;
+        height: 61px;
+        padding: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #1f2937;
+    }
+
+    .containerhalang {
+        width: 100%;
+        height: auto;
+        padding: 7px;
+        background-color: #1f2937;
+    }
+
+    .containerbutton {
+        width: 100%;
+        height: 300px;
+        padding: 0px 13px 0px 13px;
+        margin-top: 27px;
+        display: flex;
+        flex-direction: column;
+        background: #1d232e;
+    }
+
+    .pheadertop {
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .chanel1one {
+        width: 100%;
+        padding: 15px;
+        color: #fff;
+        font-size: 17px;
+        text-align: left;
+        border: none;
+        border-radius: 7px;
+        border: 1px solid #313a49;
+        background: #1f2937;
+        cursor: pointer;
+    }
+
+    .chanel1oneteruskan {
+        width: 100%;
+        padding: 15px;
+        color: #fff;
+        font-size: 17px;
+        text-align: left;
+        border: none;
+        border-radius: 7px;
+        border: 1px solid #313a49;
+        background: #1f2937;
+        cursor: pointer;
+        margin-top: 7px;
+    }
+
+    .chanel1oneteruskannext {
+        width: 100%;
+        padding: 15px;
+        color: #fff;
+        font-size: 17px;
+        text-align: left;
+        border: none;
+        border-radius: 7px;
+        border: 1px solid #313a49;
+        background: #1f2937;
+        cursor: pointer;
+        margin-top: 7px;
+    }
+
+    .spanchanel1one {
+        font-size: 13px;
+        margin-right: 7px;
+    }
+
+    .pfoundinfo {
+        margin-bottom: 15px;
+        margin-left: 3px;
+        font-size: 14px;
+        color: #9198a4;
+    }
+
+    .pfoundinfo2 {
+        margin-bottom: 15px;
+        margin-left: 3px;
+        font-size: 14px;
+        color: #9198a4;
+    }
+
+    .containerofbuttonallchanelbagian1 {
+        opacity: 1;
+        display: block;
+        transition: all 0.3s ease;
+    }
+
+    .containerofbuttonallchanelbagian2 {
+        opacity: 0;
+        display: none;
+        transition: all 0.3s ease;
+    }
+
+    .containerofbuttonallchanelbagian3 {
+        opacity: 0;
+        display: none;
+        transition: all 0.3s ease;
+    }
+</style>
+
+<body>
+    <div class="headertop">
+        <div class="containerhalang">
+            <p class="pheadertop">/iptv-stream</p>
+        </div>
+    </div>
+
+    <div class="containerofbuttonallchanelbagian1" id="containerhidenextbagian1">
+        <div class="containerbutton">
+            <p class="pfoundinfo">Found live channel(s)</p>
+            <button onclick="BandungTV()" class="chanel1one"><span class="spanchanel1one">ID</span>BandungTV</button>
+            <button onclick="btv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>BTV</button>
+            <button onclick="cnbc()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>CNBC</button>
+            <button onclick="daaitv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>DAAITV</button>
+            <button onclick="dhohotv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>DhohoTV</button>
+            <button onclick="garudatv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>GarudaTV</button>
+            <button onclick="lingkartv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>LingkarTV</button>
+            <button onclick="tvrikalsel()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TVRIKALSEL</button>
+            <button onclick="hideandreadbagian2()" class="chanel1oneteruskannext">Next</button>
+        </div>
+    </div>
+
+    <div class="containerofbuttonallchanelbagian2" id="containerhidenextbagian2">
+        <div class="containerbutton">
+            <p class="pfoundinfo">Found live channel(s)</p>
+            <button onclick="rrinet()" class="chanel1one"><span class="spanchanel1one">ID</span>RRINET</button>
+            <button onclick="radartv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>RadarTV</button>
+            <button onclick="radio51tv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>Radio51TV</button>
+            <button onclick="rtv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>RTV</button>
+            <button onclick="kesehatantv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>KesehatanTV</button>
+            <button onclick="tvridki()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TVRIDKI</button>
+            <button onclick="tvrikalteng()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TVRIKALTENG</button>
+            <button onclick="backbagian2()" class="chanel1oneteruskan">Back</button>
+            <button onclick="hideandreadbagian3()" class="chanel1oneteruskannext">Next</button>
+        </div>
+    </div>
+
+    <div class="containerofbuttonallchanelbagian3" id="containerhidenextbagian3">
+        <div class="containerbutton">
+            <p class="pfoundinfo">Found live channel(s)</p>
+            <button onclick="tvrinasional()" class="chanel1one"><span class="spanchanel1one">ID</span>TVRINasional</button>
+            <button onclick="transtv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TransTV</button>
+            <button onclick="trans7()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>Trans7</button>
+            <button onclick="wesaltv()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>WesalTV</button>
+            <button onclick="tvriword()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TVRIWord</button>
+            <button onclick="tvrijatim()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TVRIJatim</button>
+            <button onclick="tvrijabar()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TVRIJabar</button>
+            <button onclick="tvrisumbar()" class="chanel1oneteruskan"><span class="spanchanel1one">ID</span>TVRISUMBAR</button>
+            <button onclick="backbagian3()" class="chanel1oneteruskan">Back</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    function BandungTV() {
+        window.location.href = "chanel/bandungtv.html"
+    }
+
+    function btv() {
+        window.location.href = "chanel/btv.html"
+    }
+
+    function cnbc() {
+        window.location.href = "chanel/cnbc.html"
+    }
+
+    function daaitv() {
+        window.location.href = "chanel/daaitv.html"
+    }
+
+    function dhohotv() {
+        window.location.href = "chanel/dhohotv.html"
+    }
+
+    function garudatv() {
+        window.location.href = "chanel/garudatv.html"
+    }
+
+    function lingkartv() {
+        window.location.href = "chanel/lingkartv.html"
+    }
+
+    function tvrikalsel() {
+        window.location.href = "chanel/tvrikalsel.html"
+    }
+
+    function rrinet() {
+        window.location.href = "chanel/rrinet.html"
+    }
+
+    function radartv() {
+        window.location.href = "chanel/radartv.html"
+    }
+
+    function radio51tv() {
+        window.location.href = "chanel/radio51tv.html"
+    }
+
+    function rtv() {
+        window.location.href = "chanel/rtv.html"
+    }
+
+    function kesehatantv() {
+        window.location.href = "chanel/kesehatantv.html"
+    }
+
+    function tvridki() {
+        window.location.href = "chanel/tvridki.html"
+    }
+
+    function tvrikalteng() {
+        window.location.href = "chanel/tvrikalteng.html"
+    }
+
+    function tvrinasional() {
+        window.location.href = "chanel/tvrinasional.html"
+    }
+
+    function transtv() {
+        window.location.href = "chanel/transtv.html"
+    }
+
+    function trans7() {
+        window.location.href = "chanel/trans7.html"
+    }
+
+    function wesaltv() {
+        window.location.href = "chanel/wesaltv.html"
+    }
+
+    function tvriword() {
+        window.location.href = "chanel/tvriword.html"
+    }
+
+    function tvrijatim() {
+        window.location.href = "chanel/tvrijatim.html"
+    }
+
+    function tvrijabar() {
+        window.location.href = "chanel/tvrijabar.html"
+    }
+
+    function tvrisumbar() {
+        window.location.href = "chanel/tvrisumbar.html"
+    }
+
+    function backbagian2() {
+        var containerToReadAll1 = document.getElementById('containerhidenextbagian1');
+        var containerToHideAll2 = document.getElementById('containerhidenextbagian2');
+
+        if (containerToHideAll2) {
+            containerToHideAll2.style.opacity = 0;
+            setTimeout(function() {
+                containerToHideAll2.style.display = 'none';
+            }, 1000)
+        }
+
+        setTimeout(function() {
+            containerToReadAll1.style.display = 'block';
+            setTimeout(function() {
+                containerToReadAll1.style.opacity = 1;
+            }, 100)
+        }, 1100)
+    }
+
+    function backbagian3() {
+        var containerToReadAll2 = document.getElementById('containerhidenextbagian2');
+        var containerToHideAll3 = document.getElementById('containerhidenextbagian3');
+
+        if (containerToHideAll3) {
+            containerToHideAll3.style.opacity = 0;
+            setTimeout(function() {
+                containerToHideAll3.style.display = 'none';
+            }, 1000)
+        }
+
+        setTimeout(function() {
+            containerToReadAll2.style.display = 'block';
+            setTimeout(function() {
+                containerToReadAll2.style.opacity = 1;
+            }, 100)
+        }, 1100)
+    }
+
+    function hideandreadbagian2() {
+        var containerToHide1 = document.getElementById('containerhidenextbagian1');
+        var containerToRead2 = document.getElementById('containerhidenextbagian2');
+
+        if (containerToHide1) {
+            containerToHide1.style.opacity = 0;
+            setTimeout(function() {
+                containerToHide1.style.display = 'none';
+            }, 1500)
+        }
+
+        setTimeout(function() {
+            if (containerToRead2) {
+            containerToRead2.style.display = 'block';
+            setTimeout(function() {
+                containerToRead2.style.opacity = 1;
+            }, 100)
+        }
+        }, 1700)
+    }
+
+    function hideandreadbagian3() {
+        var containerToHide2 = document.getElementById('containerhidenextbagian2');
+        var containerToRead3 = document.getElementById('containerhidenextbagian3');
+
+        if (containerToHide2) {
+            containerToHide2.style.opacity = 0;
+            setTimeout(function() {
+                containerToHide2.style.display = 'none';
+            }, 1500)
+        }
+
+        setTimeout(function() {
+            if (containerToRead3) {
+            containerToRead3.style.display = 'block';
+            setTimeout(function() {
+                containerToRead3.style.opacity = 1;
+            }, 100)
+        }
+        }, 1700)
+    }
+</script>
+
+</html>
