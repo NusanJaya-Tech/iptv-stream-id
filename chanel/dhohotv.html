@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHOHOTV</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+
+<style>
+    @font-face {
+        font-family: 'Consolas';
+        src: url("fontchanel/consolas.TTF") format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Consolas', sans-serif;
+    }
+
+    body {
+        user-select: none;
+        background-color: #1d232e;
+    }
+
+    .headertop {
+        width: 100%;
+        height: 61px;
+        padding: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #1f2937;
+    }
+
+    .containerhalang {
+        width: 100%;
+        height: auto;
+        padding: 7px;
+        background-color: #1f2937;
+    }
+
+    .pheadertop {
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .containerall {
+        padding: 25px;
+    }
+
+    .containervideoplayer {
+        width: 100%;
+        height: auto;
+        padding: 13px;
+        border-radius: 7px;
+        border: 1px solid #313a49;
+        background: #1f2937;
+    }
+
+    .videohls {
+        border-radius: 7px;
+    }
+
+    .chanel1oneteruskan {
+        width: 100%;
+        padding: 15px;
+        color: #fff;
+        font-size: 17px;
+        text-align: center;
+        border: none;
+        border-radius: 7px;
+        border: 1px solid #313a49;
+        background: #1f2937;
+        cursor: pointer;
+        margin-top: 7px;
+    }
+</style>
+
+<body>
+    <div class="headertop">
+        <div class="containerhalang">
+            <p class="pheadertop">/iptv-dhohotv</p>
+        </div>
+    </div>
+
+    <div class="containerall">
+        <div class="containervideoplayer">
+            <video class="videohls" id="hls-player" controls width="100%" height="175"></video>
+        </div>
+
+        <button onclick="backbagian2()" class="chanel1oneteruskan">Back</button>
+    </div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var video = document.getElementById('hls-player');
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource('https://dhohotv.siar.us/dhohotv/live/playlist.m3u8');
+                hls.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = 'https://dhohotv.siar.us/dhohotv/live/playlist.m3u8';
+            }
+        });
+
+    function backbagian2() {
+        window.location.href = "../index.html"
+    }
+</script>
+
+</html>
